@@ -14,13 +14,15 @@ import {
 } from "@mui/material";
 
 interface BookListProps {
-  onAddToReadingList: (book: Book) => void;
+  onAddToReadingList: (book: Book, student: string) => void;
   searchQuery: string;
+  selectedStudent: string;
 }
 
 const BookList: React.FC<BookListProps> = ({
   onAddToReadingList,
   searchQuery,
+  selectedStudent,
 }) => {
   const { loading, error, data } = useQuery(GET_BOOKS);
 
@@ -51,10 +53,13 @@ const BookList: React.FC<BookListProps> = ({
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => onAddToReadingList(book)}
+                onClick={() => onAddToReadingList(book, selectedStudent)}
+                disabled={!selectedStudent}
                 style={{ marginTop: "10px" }}
               >
-                Add to Reading List
+                {selectedStudent
+                  ? `Assign to ${selectedStudent}`
+                  : "Select a Student"}
               </Button>
             </CardContent>
           </Card>
