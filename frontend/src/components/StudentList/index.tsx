@@ -6,6 +6,7 @@ import {
   IconButton,
   Button,
   ListItemButton,
+  ListItem,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -24,8 +25,10 @@ const StudentList: React.FC<StudentListProps> = ({
     <div>
       <List>
         {students.map((student, index) => (
-          <ListItemButton key={index} onClick={() => selectStudent(student)}>
-            <ListItemText primary={student} />
+          <ListItem key={index}>
+            <ListItemButton onClick={() => selectStudent(student)}>
+              <ListItemText primary={student} />
+            </ListItemButton>
             <ListItemSecondaryAction>
               <IconButton
                 edge="end"
@@ -35,7 +38,7 @@ const StudentList: React.FC<StudentListProps> = ({
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
-          </ListItemButton>
+          </ListItem>
         ))}
       </List>
       <Button
