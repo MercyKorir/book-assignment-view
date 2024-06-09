@@ -40,7 +40,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
         overflow: "auto",
       }}
     >
-      <IconButton onClick={onClose} style={{ float: "right" }}>
+      <IconButton onClick={onClose} style={{ float: "right", zIndex: "inherit" }}>
         <CloseIcon />
       </IconButton>
       <List>
