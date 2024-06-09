@@ -22,6 +22,7 @@ const BookSearch: React.FC<BookSearchProps> = ({
 }) => {
   const [showSearchResults, setShowSearchResults] = useState<boolean>(false);
   const searchResultsRef = useRef<HTMLDivElement>(null);
+  const textFieldRef = useRef<HTMLInputElement>(null);
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -32,7 +33,9 @@ const BookSearch: React.FC<BookSearchProps> = ({
     const target = e.target as Node;
     if (
       searchResultsRef.current &&
-      !searchResultsRef.current.contains(target)
+      !searchResultsRef.current.contains(target) &&
+      textFieldRef.current &&
+      !textFieldRef.current.contains(target)
     ) {
       setShowSearchResults(false);
     }
@@ -49,14 +52,22 @@ const BookSearch: React.FC<BookSearchProps> = ({
     book.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleClickInside = () => {
+    if (searchResults.length > 0) {
+      setShowSearchResults(true);
+    }
+  };
+
   return (
     <Box mb={3} position="relative">
       <TextField
+        inputRef={textFieldRef}
         variant="standard"
         fullWidth
         label="Search Books"
         value={searchQuery}
         onChange={handleSearchChange}
+        onMouseDown={handleClickInside}
       />
       {showSearchResults && (
         <div ref={searchResultsRef}>

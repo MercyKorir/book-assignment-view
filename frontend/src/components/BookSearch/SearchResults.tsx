@@ -1,6 +1,16 @@
 import React from "react";
 import { Book } from "../../types";
-import { List, ListItem, ListItemText, IconButton, Paper } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Paper,
+  Card,
+  CardMedia,
+  CardContent,
+  ListItemButton,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -22,30 +32,44 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   return (
     <Paper
       elevation={3}
-      style={{ position: "absolute", zIndex: 1, width: "100%" }}
+      style={{
+        position: "absolute",
+        zIndex: 1,
+        width: "100%",
+        height: "300px",
+        overflow: "auto",
+      }}
     >
       <IconButton onClick={onClose} style={{ float: "right" }}>
         <CloseIcon />
       </IconButton>
       <List>
-        {books.map((book) => (
-          <ListItem key={book.title} disableGutters>
-            <ListItemText
-              primary={book.title}
-              secondary={book.author}
-              onClick={() => handleBookClick(book.title)}
-              style={{ cursor: "pointer" }}
-            />
-            <IconButton
-              edge="end"
-              color="primary"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleAddToReadingList(book, selectedStudent);
-              }}
-            >
-              <AddIcon />
-            </IconButton>
+        {books.map((book, index) => (
+          <ListItem key={index}>
+            <Card style={{ display: "flex", width: "100%" }}>
+              <ListItemButton onClick={() => handleBookClick(book.title)}>
+                <CardMedia
+                  component="img"
+                  image={`/${book.coverPhotoURL}`}
+                  style={{ width: 100 }}
+                />
+                <CardContent>
+                  <ListItemText primary={book.title} secondary={book.author} />
+                </CardContent>
+              </ListItemButton>
+              <IconButton
+                edge="start"
+                color="primary"
+                style={{ width: "50px", height: "50px", margin: "auto 5px" }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddToReadingList(book, selectedStudent);
+                }}
+                disabled={!selectedStudent}
+              >
+                <AddIcon />
+              </IconButton>
+            </Card>
           </ListItem>
         ))}
       </List>
