@@ -22,7 +22,13 @@ const ReadingList: React.FC<ReadingListProps> = ({
   selectedStudent,
 }) => {
   return (
-    <List>
+    <List
+      sx={{
+        width: "100%",
+        maxHeight: "500px",
+        overflowY: "auto",
+      }}
+    >
       {selectedStudent && readingList[selectedStudent]?.length ? (
         readingList[selectedStudent].map((book: Book, index: any) => (
           <ListItem key={index}>
@@ -35,15 +41,33 @@ const ReadingList: React.FC<ReadingListProps> = ({
               />
               <CardContent>
                 <Typography variant="h6">{book.title}</Typography>
-                <Typography variant="subtitle1">{book.author}</Typography>
-                <Typography variant="body2">
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    color: "rgba(0,0,0,0.7)",
+                    fontSize: "15px",
+                  }}
+                >
+                  {book.author}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgba(0,0,0,0.6)",
+                    fontSize: "13px",
+                  }}
+                >
                   Reading Level: {book.readingLevel}
                 </Typography>
                 <Button
                   variant="contained"
                   color="secondary"
                   onClick={() => onRemoveFromReadingList(book, selectedStudent)}
-                  style={{ marginTop: "10px" }}
+                  style={{
+                    marginTop: "5px",
+                    background: "#F76424",
+                    height: "40px",
+                  }}
                 >
                   Remove from Reading List
                 </Button>

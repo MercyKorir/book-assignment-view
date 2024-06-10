@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Container, Grid, Typography, CircularProgress } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Typography,
+  CircularProgress,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Box,
+} from "@mui/material";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import BookSearch from "../BookSearch";
 import BookList from "../BookList";
 import ReadingList from "../ReadingList";
@@ -15,6 +25,7 @@ const Home: React.FC<HomeProps> = () => {
   const [students, setStudents] = useState<string[]>([]);
   const [selectedStudent, setSelectedStudent] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [darkMode, setDarkMode] = useState<boolean>(false);
   const [readingList, setReadingList] = useState<{ [student: string]: Book[] }>(
     {}
   );
@@ -58,52 +69,127 @@ const Home: React.FC<HomeProps> = () => {
     }
   };
 
+  const handleThemeChange = () => {
+    setDarkMode(!darkMode);
+  };
+
   if (loading) return <CircularProgress />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Book Assignment
-      </Typography>
-
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={3}>
-          <Typography variant="h6" gutterBottom>
-            Students
-          </Typography>
-          <StudentList
-            students={students}
-            selectStudent={selectStudent}
-            removeStudent={removeStudent}
-          />
-          <AddStudentForm addStudent={addStudent} />
+    <Container
+      sx={{
+        minWidth: "100vw",
+        maxWidth: "100vw",
+        paddingLeft: "0px !important",
+        paddingRight: "0px !important",
+      }}
+    >
+      <AppBar
+        position="static"
+        sx={{
+          background: "#335C6E",
+          height: "120px",
+          justifyContent: "center",
+        }}
+      >
+        <Toolbar
+          disableGutters
+          sx={{
+            padding: "0px 200px",
+          }}
+        >
+          <Box flexGrow={0.8}>
+            <Typography
+              variant="h4"
+              textTransform="uppercase"
+              gutterBottom
+              sx={{ fontSize: "32px", color: "#ffffff", fontWeight: "bold" }}
+            >
+              Book Assignment
+            </Typography>
+          </Box>
+          <Box flexGrow={1}>
+            <BookSearch
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              books={data.books}
+              handleAddToReadingList={handleAddToReadingList}
+              handleBookClick={handleBookClick}
+              selectedStudent={selectedStudent}
+            />
+          </Box>
+          <Box
+            flexGrow={1}
+            sx={{ display: "flex", justifyContent: "flex-end" }}
+          >
+            <IconButton
+              onClick={handleThemeChange}
+              sx={{ fontSize: "50px", color: "#fff" }}
+            >
+              <DarkModeIcon fontSize="inherit" />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <Grid container spacing={0}>
+        <Grid
+          item
+          xs={12}
+          sm={4.5}
+          sx={{
+            width: "100%",
+            padding: "0px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "50px",
+            textAlign: "center",
+          }}
+        >
+          <Box
+            sx={{
+              background: "#fff",
+              boxShadow: "inset 0px 4px 4px rgba(0, 0, 0, 0.25)",
+              padding: "30px 15px",
+            }}
+          >
+            <Typography
+              variant="h6"
+              gutterBottom
+              sx={{ fontSize: "32px", color: "#28B8B8", fontWeight: "bold" }}
+            >
+              Students
+            </Typography>
+            <StudentList
+              students={students}
+              selectStudent={selectStudent}
+              removeStudent={removeStudent}
+            />
+            <AddStudentForm addStudent={addStudent} />
+          </Box>
+          <Box>
+            <Typography
+              variant="h6"
+              gutterBottom
+              sx={{ fontSize: "32px", color: "#28B8B8", fontWeight: "bold" }}
+            >
+              Reading List
+            </Typography>
+            <ReadingList
+              readingList={readingList}
+              onRemoveFromReadingList={handleRemoveFromReadingList}
+              selectedStudent={selectedStudent}
+            />
+          </Box>
         </Grid>
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} sm={7}>
           <Typography variant="h6" gutterBottom>
             Search Results
           </Typography>
-          <BookSearch
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            books={data.books}
-            handleAddToReadingList={handleAddToReadingList}
-            handleBookClick={handleBookClick}
-            selectedStudent={selectedStudent}
-          />
           <BookList
             searchQuery={searchQuery}
             onAddToReadingList={handleAddToReadingList}
-            selectedStudent={selectedStudent}
-          />
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Typography variant="h6" gutterBottom>
-            Reading List
-          </Typography>
-          <ReadingList
-            readingList={readingList}
-            onRemoveFromReadingList={handleRemoveFromReadingList}
             selectedStudent={selectedStudent}
           />
         </Grid>

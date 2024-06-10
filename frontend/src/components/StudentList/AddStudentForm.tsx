@@ -24,13 +24,23 @@ const AddStudentForm: React.FC<AddStudentFormProps> = ({ addStudent }) => {
         onChange={(e) => setStudentName(e.target.value)}
         fullWidth
         margin="normal"
+        InputLabelProps={{
+          style: {
+            color: "rgba(51, 92, 110, 0.5)",
+            fontSize: "18px",
+          },
+        }}
       />
       <Button
         type="submit"
         variant="contained"
         color="primary"
         fullWidth
-        style={{ marginTop: "10px" }}
+        style={{
+          marginTop: "5px",
+          background: "#335C6E",
+          height: "50px",
+        }}
       >
         Add Student
       </Button>

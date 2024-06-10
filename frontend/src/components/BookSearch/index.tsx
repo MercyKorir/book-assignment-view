@@ -68,6 +68,26 @@ const BookSearch: React.FC<BookSearchProps> = ({
         value={searchQuery}
         onChange={handleSearchChange}
         onMouseDown={handleClickInside}
+        InputLabelProps={{
+          style: {
+            color: "#fff",
+            fontSize: "24px",
+          },
+        }}
+        InputProps={{
+          style: {
+            height: "40px",
+            borderBottom: "1px solid #fff",
+          },
+        }}
+        sx={{
+          "& .MuiInputBase-root:after": {
+            borderBottom: "2px solid #53c2c2",
+          },
+          "& .MuiInput-root": {
+            color: "#fff",
+          },
+        }}
       />
       {showSearchResults && (
         <div ref={searchResultsRef}>
