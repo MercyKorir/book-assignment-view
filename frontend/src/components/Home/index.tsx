@@ -81,6 +81,7 @@ const Home: React.FC<HomeProps> = () => {
       sx={{
         minWidth: "100vw",
         maxWidth: "100vw",
+        minHeight: "100vh",
         paddingLeft: "0px !important",
         paddingRight: "0px !important",
       }}
@@ -136,7 +137,7 @@ const Home: React.FC<HomeProps> = () => {
         <Grid
           item
           xs={12}
-          sm={4.5}
+          sm={3.6}
           sx={{
             width: "100%",
             padding: "0px",
@@ -183,9 +184,28 @@ const Home: React.FC<HomeProps> = () => {
             />
           </Box>
         </Grid>
-        <Grid item xs={12} sm={7}>
-          <Typography variant="h6" gutterBottom>
-            Search Results
+        <Grid
+          item
+          xs={12}
+          sm={8.4}
+          sx={{
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+            padding: "50px 300px 50px 100px",
+            minHeight: "91.1vh",
+          }}
+        >
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{
+              textAlign: "center",
+              textTransform: "uppercase",
+              fontSize: "42px",
+              color: "#28B8B8",
+              fontWeight: "bold",
+            }}
+          >
+            Books List
           </Typography>
           <BookList
             searchQuery={searchQuery}

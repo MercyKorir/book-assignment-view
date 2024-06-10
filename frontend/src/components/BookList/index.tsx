@@ -3,15 +3,15 @@ import { useQuery } from "@apollo/client";
 import { GET_BOOKS } from "../../graphql/queries";
 import { Book } from "../../types";
 import {
-  List,
-  ListItem,
-  Button,
+  Grid,
+  IconButton,
   CircularProgress,
   Card,
   CardMedia,
   CardContent,
   Typography,
 } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 interface BookListProps {
   onAddToReadingList: (book: Book, student: string) => void;
@@ -34,38 +34,78 @@ const BookList: React.FC<BookListProps> = ({
   );
 
   return (
-    <List>
+    <Grid container spacing={2} sx={{ margin: "auto" }}>
       {filteredBooks.map((book: Book, index: any) => (
-        <ListItem key={index}>
-          <Card style={{ display: "flex", width: "100%" }}>
+        <Grid item key={index} xs={12} sm={6} md={4} sx={{ margin: "auto" }}>
+          <Card
+            sx={{
+              width: "400px",
+              height: "400px",
+              borderRadius: "20px",
+              position: "relative",
+              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+            }}
+          >
             <CardMedia
               component="img"
               image={`/${book.coverPhotoURL}`}
               alt={book.title}
-              style={{ width: 100 }}
+              sx={{
+                margin: "auto",
+                width: "auto",
+                height: "60%",
+                objectFit: "contain",
+                objectPosition: "center",
+                borderRadius: "50%",
+              }}
             />
-            <CardContent>
-              <Typography variant="h6">{book.title}</Typography>
-              <Typography variant="subtitle1">{book.author}</Typography>
-              <Typography variant="body2">
+            <CardContent
+              sx={{
+                background: "rgba(90, 204, 204, 0.2)",
+                height: "40%",
+                padding: "20px 30px 0px 30px",
+                textAlign: "center",
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: "bold", color: "#335c6e" }}
+              >
+                {book.title}
+              </Typography>
+              <Typography variant="subtitle1" sx={{ color: "#4aa088" }}>
+                {book.author}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "rgba(51, 92, 110, 0.7)" }}
+              >
                 Reading Level: {book.readingLevel}
               </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => onAddToReadingList(book, selectedStudent)}
-                disabled={!selectedStudent}
-                style={{ marginTop: "10px" }}
-              >
-                {selectedStudent
-                  ? `Assign to ${selectedStudent}`
-                  : "Select a Student"}
-              </Button>
             </CardContent>
+            <IconButton
+              onClick={() => onAddToReadingList(book, selectedStudent)}
+              disabled={!selectedStudent}
+              sx={{
+                width: "60px",
+                height: "60px",
+                position: "absolute",
+                top: "50%",
+                right: "5px",
+                fontSize: "36px",
+                borderRadius: "50%",
+                boxShadow:
+                  "0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25)",
+                backgroundColor: "rgba(247, 100, 52, 0.3)",
+                color: "#000",
+              }}
+            >
+              <AddIcon fontSize="inherit" />
+            </IconButton>
           </Card>
-        </ListItem>
+        </Grid>
       ))}
-    </List>
+    </Grid>
   );
 };
 
