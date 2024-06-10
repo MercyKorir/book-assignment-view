@@ -211,6 +211,7 @@ const Home: React.FC<HomeProps> = () => {
             searchQuery={searchQuery}
             onAddToReadingList={handleAddToReadingList}
             selectedStudent={selectedStudent}
+            readingList={readingList}
           />
         </Grid>
       </Grid>

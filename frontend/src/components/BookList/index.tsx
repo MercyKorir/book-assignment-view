@@ -17,12 +17,14 @@ interface BookListProps {
   onAddToReadingList: (book: Book, student: string) => void;
   searchQuery: string;
   selectedStudent: string;
+  readingList: { [student: string]: Book[] };
 }
 
 const BookList: React.FC<BookListProps> = ({
   onAddToReadingList,
   searchQuery,
   selectedStudent,
+  readingList,
 }) => {
   const { loading, error, data } = useQuery(GET_BOOKS);
 
@@ -32,6 +34,9 @@ const BookList: React.FC<BookListProps> = ({
   const filteredBooks = data.books.filter((book: Book) =>
     book.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const isBookInReadingList = (book: Book) =>
+    readingList[selectedStudent]?.some((b) => b.title === book.title);
 
   return (
     <Grid container spacing={2} sx={{ margin: "auto" }}>
@@ -85,7 +90,7 @@ const BookList: React.FC<BookListProps> = ({
             </CardContent>
             <IconButton
               onClick={() => onAddToReadingList(book, selectedStudent)}
-              disabled={!selectedStudent}
+              disabled={!selectedStudent || isBookInReadingList(book)}
               sx={{
                 width: "60px",
                 height: "60px",

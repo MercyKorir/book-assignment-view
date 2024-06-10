@@ -1,7 +1,8 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import { Box, TextField } from "@mui/material";
+import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
 import { Book } from "../../types";
 import SearchResults from "./SearchResults";
+import ClearIcon from "@mui/icons-material/Clear";
 
 interface BookSearchProps {
   searchQuery: string;
@@ -58,6 +59,11 @@ const BookSearch: React.FC<BookSearchProps> = ({
     }
   };
 
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    setShowSearchResults(false);
+  };
+
   return (
     <Box mb={3} position="relative">
       <TextField
@@ -79,6 +85,20 @@ const BookSearch: React.FC<BookSearchProps> = ({
             height: "40px",
             borderBottom: "1px solid #fff",
           },
+          endAdornment: (
+            <InputAdornment position="end" sx={{ marginRight: "15px" }}>
+              <IconButton
+                aria-label="clear search"
+                onClick={handleClearSearch}
+                edge="end"
+                sx={{
+                  visibility: searchQuery.length > 0 ? "visible" : "hidden",
+                }}
+              >
+                <ClearIcon sx={{ color: "#fff" }} />
+              </IconButton>
+            </InputAdornment>
+          ),
         }}
         sx={{
           "& .MuiInputBase-root:after": {
