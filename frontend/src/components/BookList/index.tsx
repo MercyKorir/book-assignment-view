@@ -35,6 +35,8 @@ const BookList: React.FC<BookListProps> = ({
     book.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Note: At the moment, since there are no IDs in the book data and some book titles are similar,
+  // this may lead to errors. However, once unique IDs are implemented, this functionality will work as expected.
   const isBookInReadingList = (book: Book) =>
     readingList[selectedStudent]?.some((b) => b.title === book.title) || false;
 
