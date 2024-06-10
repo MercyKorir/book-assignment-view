@@ -36,7 +36,7 @@ const BookList: React.FC<BookListProps> = ({
   );
 
   const isBookInReadingList = (book: Book) =>
-    readingList[selectedStudent]?.some((b) => b.title === book.title);
+    readingList[selectedStudent]?.some((b) => b.title === book.title) || false;
 
   return (
     <Grid container spacing={2} sx={{ margin: "auto" }}>
