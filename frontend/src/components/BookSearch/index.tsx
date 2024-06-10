@@ -1,5 +1,10 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import { Book } from "../../types";
 import SearchResults from "./SearchResults";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -22,12 +27,17 @@ const BookSearch: React.FC<BookSearchProps> = ({
   selectedStudent,
 }) => {
   const [showSearchResults, setShowSearchResults] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const searchResultsRef = useRef<HTMLDivElement>(null);
   const textFieldRef = useRef<HTMLInputElement>(null);
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setLoading(true);
     setSearchQuery(e.target.value);
     setShowSearchResults(e.target.value.length > 0);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   };
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -117,6 +127,7 @@ const BookSearch: React.FC<BookSearchProps> = ({
             handleBookClick={handleBookClick}
             selectedStudent={selectedStudent}
             onClose={() => setShowSearchResults(false)}
+            loading={loading}
           />
         </div>
       )}

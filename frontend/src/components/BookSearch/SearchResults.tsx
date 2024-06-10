@@ -10,6 +10,8 @@ import {
   CardMedia,
   CardContent,
   ListItemButton,
+  Box,
+  CircularProgress,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
@@ -20,6 +22,7 @@ interface SearchResultsProps {
   handleBookClick: (title: string) => void;
   selectedStudent: string;
   onClose: () => void;
+  loading: boolean;
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({
@@ -28,6 +31,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   handleBookClick,
   selectedStudent,
   onClose,
+  loading,
 }) => {
   return (
     <Paper
@@ -40,39 +44,56 @@ const SearchResults: React.FC<SearchResultsProps> = ({
         overflow: "auto",
       }}
     >
-      <IconButton onClick={onClose} style={{ float: "right", zIndex: "inherit" }}>
+      <IconButton
+        onClick={onClose}
+        style={{ float: "right", zIndex: "inherit" }}
+      >
         <CloseIcon />
       </IconButton>
-      <List>
-        {books.map((book, index) => (
-          <ListItem key={index}>
-            <Card style={{ display: "flex", width: "100%" }}>
-              <ListItemButton onClick={() => handleBookClick(book.title)}>
-                <CardMedia
-                  component="img"
-                  image={`/${book.coverPhotoURL}`}
-                  style={{ width: 100 }}
-                />
-                <CardContent>
-                  <ListItemText primary={book.title} secondary={book.author} />
-                </CardContent>
-              </ListItemButton>
-              <IconButton
-                edge="start"
-                color="primary"
-                style={{ width: "50px", height: "50px", margin: "auto 5px" }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleAddToReadingList(book, selectedStudent);
-                }}
-                disabled={!selectedStudent}
-              >
-                <AddIcon />
-              </IconButton>
-            </Card>
-          </ListItem>
-        ))}
-      </List>
+      {loading ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100%"
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <List>
+          {books.map((book, index) => (
+            <ListItem key={index}>
+              <Card style={{ display: "flex", width: "100%" }}>
+                <ListItemButton onClick={() => handleBookClick(book.title)}>
+                  <CardMedia
+                    component="img"
+                    image={`/${book.coverPhotoURL}`}
+                    style={{ width: 100 }}
+                  />
+                  <CardContent>
+                    <ListItemText
+                      primary={book.title}
+                      secondary={book.author}
+                    />
+                  </CardContent>
+                </ListItemButton>
+                <IconButton
+                  edge="start"
+                  color="primary"
+                  style={{ width: "50px", height: "50px", margin: "auto 5px" }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddToReadingList(book, selectedStudent);
+                  }}
+                  disabled={!selectedStudent}
+                >
+                  <AddIcon />
+                </IconButton>
+              </Card>
+            </ListItem>
+          ))}
+        </List>
+      )}
     </Paper>
   );
 };

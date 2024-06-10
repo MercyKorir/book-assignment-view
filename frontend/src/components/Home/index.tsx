@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Grid,
@@ -29,7 +29,15 @@ const Home: React.FC<HomeProps> = () => {
   const [readingList, setReadingList] = useState<{ [student: string]: Book[] }>(
     {}
   );
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { loading, error, data } = useQuery(GET_BOOKS);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const addStudent = (student: string) => {
     setStudents([...students, student]);
@@ -73,7 +81,20 @@ const Home: React.FC<HomeProps> = () => {
     setDarkMode(!darkMode);
   };
 
-  if (loading) return <CircularProgress />;
+  if (loading || isLoading) {
+    return (
+      <Container>
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          sx={{ minHeight: "100vh" }}
+        >
+          <CircularProgress />
+        </Grid>
+      </Container>
+    );
+  }
   if (error) return <p>Error: {error.message}</p>;
 
   return (
