@@ -10,6 +10,8 @@ import {
   Box,
 } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import BookSearch from "../BookSearch";
 import BookList from "../BookList";
 import ReadingList from "../ReadingList";
@@ -41,6 +43,7 @@ const Home: React.FC<HomeProps> = () => {
 
   const addStudent = (student: string) => {
     setStudents([...students, student]);
+    toast.success(`${student} added successfully!`);
   };
 
   const selectStudent = (student: string) => {
@@ -53,6 +56,7 @@ const Home: React.FC<HomeProps> = () => {
     delete updatedReadingList[student];
     setReadingList(updatedReadingList);
     if (selectedStudent === student) setSelectedStudent("");
+    toast.success(`${student} removed successfully!`);
   };
 
   const handleAddToReadingList = (book: Book, student: string) => {
@@ -60,6 +64,7 @@ const Home: React.FC<HomeProps> = () => {
     if (!updatedReadingList[student]) updatedReadingList[student] = [];
     updatedReadingList[student].push(book);
     setReadingList(updatedReadingList);
+    toast.success(`Added ${book.title} to reading list for ${student}!`);
   };
 
   const handleRemoveFromReadingList = (book: Book, student: string) => {
@@ -68,6 +73,7 @@ const Home: React.FC<HomeProps> = () => {
       (b) => b.title !== book.title
     );
     setReadingList(updatedReadingList);
+    toast.success(`Removed ${book.title} from reading list for ${student}!`);
   };
 
   const handleBookClick = (title: string) => {
@@ -95,7 +101,9 @@ const Home: React.FC<HomeProps> = () => {
       </Container>
     );
   }
-  if (error) return <p>Error: {error.message}</p>;
+  if (error) {
+    toast.error(`Error occurred: ${error.message}`);
+  }
 
   return (
     <Container
@@ -107,6 +115,7 @@ const Home: React.FC<HomeProps> = () => {
         paddingRight: "0px !important",
       }}
     >
+      <ToastContainer />
       <AppBar
         position="static"
         sx={{
