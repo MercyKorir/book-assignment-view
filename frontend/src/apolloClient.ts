@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const apolloClient = new ApolloClient({
-  uri: "http://localhost:4000/",
+  uri: "https://book-assignment-view-s3v5.onrender.com",
   cache: new InMemoryCache(),
 });
 
