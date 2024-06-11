@@ -9,8 +9,6 @@ import {
   IconButton,
   Box,
   Drawer,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -39,9 +37,6 @@ const Home: React.FC<HomeProps> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { loading, error, data } = useQuery(GET_BOOKS);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     const timer = setTimeout(() => {
