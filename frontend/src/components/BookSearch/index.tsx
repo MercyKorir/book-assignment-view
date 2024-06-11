@@ -1,10 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import {
-  Box,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from "@mui/material";
+import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
 import { Book } from "../../types";
 import SearchResults from "./SearchResults";
 import ClearIcon from "@mui/icons-material/Clear";

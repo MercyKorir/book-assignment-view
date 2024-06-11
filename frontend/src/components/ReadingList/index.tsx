@@ -25,27 +25,42 @@ const ReadingList: React.FC<ReadingListProps> = ({
     <List
       sx={{
         width: "100%",
-        maxHeight: "500px",
+        maxHeight: { xs: "330px", md: "500px" },
         overflowY: "auto",
       }}
     >
       {selectedStudent && readingList[selectedStudent]?.length ? (
         readingList[selectedStudent].map((book: Book, index: any) => (
           <ListItem key={index}>
-            <Card style={{ display: "flex", width: "100%" }}>
+            <Card
+              sx={{
+                display: "flex",
+                width: "100%",
+                height: { xs: "150px", md: "fit-content" },
+              }}
+            >
               <CardMedia
                 component="img"
-                style={{ width: 100 }}
+                sx={{ width: 100 }}
                 image={`/${book.coverPhotoURL}`}
                 alt={book.title}
               />
-              <CardContent>
-                <Typography variant="h6">{book.title}</Typography>
+              <CardContent
+                sx={{ padding: { xs: "8px 0px 0px 8px", md: "auto" } }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: { xs: "16px", md: "24px" },
+                  }}
+                >
+                  {book.title}
+                </Typography>
                 <Typography
                   variant="subtitle1"
                   sx={{
                     color: "rgba(0,0,0,0.7)",
-                    fontSize: "15px",
+                    fontSize: { xs: "13px", md: "15px" },
                   }}
                 >
                   {book.author}
@@ -54,7 +69,7 @@ const ReadingList: React.FC<ReadingListProps> = ({
                   variant="body2"
                   sx={{
                     color: "rgba(0,0,0,0.6)",
-                    fontSize: "13px",
+                    fontSize: { xs: "11px", md: "13px" },
                   }}
                 >
                   Reading Level: {book.readingLevel}
@@ -63,10 +78,11 @@ const ReadingList: React.FC<ReadingListProps> = ({
                   variant="contained"
                   color="secondary"
                   onClick={() => onRemoveFromReadingList(book, selectedStudent)}
-                  style={{
+                  sx={{
                     marginTop: "5px",
                     background: "#F76424",
                     height: "40px",
+                    fontSize: { xs: "12px", md: "14px" },
                   }}
                 >
                   Remove from Reading List

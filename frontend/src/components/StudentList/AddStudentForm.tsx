@@ -25,9 +25,9 @@ const AddStudentForm: React.FC<AddStudentFormProps> = ({ addStudent }) => {
         fullWidth
         margin="normal"
         InputLabelProps={{
-          style: {
+          sx: {
             color: "rgba(51, 92, 110, 0.5)",
-            fontSize: "18px",
+            fontSize: {xs: "16px", md: "18px"},
           },
         }}
       />
@@ -36,10 +36,10 @@ const AddStudentForm: React.FC<AddStudentFormProps> = ({ addStudent }) => {
         variant="contained"
         color="primary"
         fullWidth
-        style={{
+        sx={{
           marginTop: "5px",
           background: "#335C6E",
-          height: "50px",
+          height: {xs: "40px", md: "50px"},
         }}
       >
         Add Student

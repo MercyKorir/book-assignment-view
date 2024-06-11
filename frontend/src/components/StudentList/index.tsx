@@ -29,7 +29,7 @@ const StudentList: React.FC<StudentListProps> = ({
           background: "#fff",
           marginBottom: "10px",
           width: "100%",
-          height: "180px",
+          height: { xs: "100px", md: "180px" },
           maxHeight: "180px",
           overflowY: "auto",
           boxShadow: "inset 2px 2px 4px rgba(0, 0, 0, 0.25)",
@@ -42,7 +42,10 @@ const StudentList: React.FC<StudentListProps> = ({
                 primary={
                   <Typography
                     variant="body1"
-                    sx={{ fontSize: "22px", color: "#335C6E" }}
+                    sx={{
+                      fontSize: { xs: "18px", md: "22px" },
+                      color: "#335C6E",
+                    }}
                   >
                     {index + 1}. {student}
                   </Typography>
@@ -54,7 +57,7 @@ const StudentList: React.FC<StudentListProps> = ({
                 edge="end"
                 aria-label="delete"
                 onClick={() => removeStudent(student)}
-                sx={{ fontSize: "30px", color: "#5ACCCC" }}
+                sx={{ fontSize: { xs: "26px", md: "30px" }, color: "#5ACCCC" }}
               >
                 <DeleteIcon fontSize="inherit" />
               </IconButton>
@@ -66,11 +69,12 @@ const StudentList: React.FC<StudentListProps> = ({
         variant="contained"
         color="primary"
         onClick={() => selectStudent("")}
-        style={{
+        sx={{
           background: "#335C6E",
-          height: "50px",
-          width: "250px",
-          marginBottom: "5px",
+          height: { xs: "40px", md: "50px" },
+          width: { xs: "230px", md: "250px" },
+          marginBottom: { xs: "0px", md: "5px" },
+          fontSize: { xs: "14px", md: "22px" },
         }}
       >
         Clear Selected Student

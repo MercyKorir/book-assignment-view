@@ -36,7 +36,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   return (
     <Paper
       elevation={3}
-      style={{
+      sx={{
         position: "absolute",
         zIndex: 1,
         width: "100%",
@@ -44,10 +44,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
         overflow: "auto",
       }}
     >
-      <IconButton
-        onClick={onClose}
-        style={{ float: "right", zIndex: "inherit" }}
-      >
+      <IconButton onClick={onClose} sx={{ float: "right", zIndex: "inherit" }}>
         <CloseIcon />
       </IconButton>
       {loading ? (
@@ -63,24 +60,35 @@ const SearchResults: React.FC<SearchResultsProps> = ({
         <List>
           {books.map((book, index) => (
             <ListItem key={index}>
-              <Card style={{ display: "flex", width: "100%" }}>
+              <Card
+                sx={{
+                  display: "flex",
+                  width: "100%",
+                  height: { xs: "100px", md: "fit-content" },
+                }}
+              >
                 <ListItemButton onClick={() => handleBookClick(book.title)}>
                   <CardMedia
                     component="img"
                     image={`/${book.coverPhotoURL}`}
-                    style={{ width: 100 }}
+                    sx={{ width: 100 }}
                   />
-                  <CardContent>
+                  <CardContent
+                    sx={{ padding: { xs: "0px 0px 0px 10px", md: "auto" } }}
+                  >
                     <ListItemText
                       primary={book.title}
                       secondary={book.author}
+                      primaryTypographyProps={{
+                        sx: { fontSize: { xs: "13px", md: "16px" } },
+                      }}
                     />
                   </CardContent>
                 </ListItemButton>
                 <IconButton
                   edge="start"
                   color="primary"
-                  style={{ width: "50px", height: "50px", margin: "auto 5px" }}
+                  sx={{ width: "50px", height: "50px", margin: "auto 5px" }}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleAddToReadingList(book, selectedStudent);
