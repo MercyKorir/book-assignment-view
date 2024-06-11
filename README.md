@@ -45,4 +45,4 @@ The Book Assignment View is a web application built with React, TypeScript, and 
 
 ## Deployment
 
-The Book Assignment View application is deployed and accessible at [[book-assignment-view](https://book-assignment-view.netlify.app/)]. You can explore the live application and its features directly.
+The Book Assignment View application is deployed and accessible at [book-assignment-view](https://book-assignment-view.netlify.app/). You can explore the live application and its features directly.
