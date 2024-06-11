@@ -41,16 +41,31 @@ const BookList: React.FC<BookListProps> = ({
     readingList[selectedStudent]?.some((b) => b.title === book.title) || false;
 
   return (
-    <Grid container spacing={2} sx={{ margin: "auto" }}>
+    <Grid
+      container
+      spacing={2}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       {filteredBooks.map((book: Book, index: any) => (
-        <Grid item key={index} xs={12} sm={6} md={4} sx={{ margin: "auto" }}>
+        <Grid
+          item
+          key={index}
+          xs={12}
+          sm={6}
+          md={4}
+          sx={{ margin: "auto", width: { xs: "100%", sm: "auto" } }}
+        >
           <Card
             sx={{
-              width: "400px",
-              height: "400px",
+              width: { xs: "100%", sm: "400px" },
+              height: { xs: "300px", sm: "400px" },
               borderRadius: "20px",
               position: "relative",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+              marginBottom: { xs: "20px", sm: "0px" },
             }}
           >
             <CardMedia
@@ -76,16 +91,26 @@ const BookList: React.FC<BookListProps> = ({
             >
               <Typography
                 variant="h6"
-                sx={{ fontWeight: "bold", color: "#335c6e" }}
+                sx={{
+                  fontWeight: "bold",
+                  color: "#335c6e",
+                  fontSize: { xs: "15px", md: "18px" },
+                }}
               >
                 {book.title}
               </Typography>
-              <Typography variant="subtitle1" sx={{ color: "#4aa088" }}>
+              <Typography
+                variant="subtitle1"
+                sx={{ color: "#4aa088", fontSize: { xs: "14px", sm: "14px" } }}
+              >
                 {book.author}
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ color: "rgba(51, 92, 110, 0.7)" }}
+                sx={{
+                  color: "rgba(51, 92, 110, 0.7)",
+                  fontSize: { xs: "12px", sm: "14px" },
+                }}
               >
                 Reading Level: {book.readingLevel}
               </Typography>
@@ -94,8 +119,8 @@ const BookList: React.FC<BookListProps> = ({
               onClick={() => onAddToReadingList(book, selectedStudent)}
               disabled={!selectedStudent || isBookInReadingList(book)}
               sx={{
-                width: "60px",
-                height: "60px",
+                width: { xs: "50px", sm: "60px" },
+                height: { xs: "50px", sm: "60px" },
                 position: "absolute",
                 top: "50%",
                 right: "5px",

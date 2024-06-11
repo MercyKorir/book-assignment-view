@@ -136,7 +136,7 @@ const Home: React.FC<HomeProps> = () => {
         <Toolbar
           disableGutters
           sx={{
-            padding: { xs: "0px 50px", md: "0px 200px" },
+            padding: { xs: "0px 20px", sm: "0px 50px", md: "0px 200px" },
           }}
         >
           <Box flexGrow={0.8}>
@@ -273,7 +273,12 @@ const Home: React.FC<HomeProps> = () => {
             />
             <AddStudentForm addStudent={addStudent} />
           </Box>
-          <Box sx={{ padding: { xs: "10px", md: "20px" } }}>
+          <Box
+            sx={{
+              padding: { xs: "0px", md: "20px" },
+              marginTop: { xs: "10px", md: "0px" },
+            }}
+          >
             <Typography
               variant="h6"
               gutterBottom
@@ -348,8 +353,12 @@ const Home: React.FC<HomeProps> = () => {
           sm={8.4}
           sx={{
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            padding: { xs: "50px 20px", md: "50px 300px 50px 100px" },
-            minHeight: "91.1vh",
+            padding: {
+              xs: "0px 10px",
+              sm: "0px 20px",
+              md: "50px 300px 50px 100px",
+            },
+            minHeight: { xs: "auto", md: "91.1vh" },
           }}
         >
           <Typography
@@ -358,7 +367,7 @@ const Home: React.FC<HomeProps> = () => {
             sx={{
               textAlign: "center",
               textTransform: "uppercase",
-              fontSize: "42px",
+              fontSize: { xs: "36px", md: "42px" },
               color: "#28B8B8",
               fontWeight: "bold",
             }}

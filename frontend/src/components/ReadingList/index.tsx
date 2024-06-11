@@ -82,7 +82,7 @@ const ReadingList: React.FC<ReadingListProps> = ({
                     marginTop: "5px",
                     background: "#F76424",
                     height: "40px",
-                    fontSize: { xs: "12px", md: "14px" },
+                    fontSize: { xs: "10px", md: "14px" },
                   }}
                 >
                   Remove from Reading List
