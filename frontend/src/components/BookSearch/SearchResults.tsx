@@ -64,7 +64,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                 sx={{
                   display: "flex",
                   width: "100%",
-                  height: { xs: "100px", md: "fit-content" },
+                  height: { xs: "200px", md: "fit-content" },
                 }}
               >
                 <ListItemButton onClick={() => handleBookClick(book.title)}>
