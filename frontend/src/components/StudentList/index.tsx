@@ -35,35 +35,51 @@ const StudentList: React.FC<StudentListProps> = ({
           boxShadow: "inset 2px 2px 4px rgba(0, 0, 0, 0.25)",
         }}
       >
-        {students.map((student, index) => (
-          <ListItem key={index} sx={{ margin: "0px", padding: "0px" }}>
-            <ListItemButton onClick={() => selectStudent(student)}>
-              <ListItemText
-                primary={
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      fontSize: { xs: "18px", md: "22px" },
-                      color: "#335C6E",
-                    }}
-                  >
-                    {index + 1}. {student}
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-            <ListItemSecondaryAction>
-              <IconButton
-                edge="end"
-                aria-label="delete"
-                onClick={() => removeStudent(student)}
-                sx={{ fontSize: { xs: "26px", md: "30px" }, color: "#5ACCCC" }}
-              >
-                <DeleteIcon fontSize="inherit" />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
+        {students.length === 0 ? (
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: { xs: "14px", md: "16px" },
+              color: "#335c6e",
+              textAlign: "center",
+            }}
+          >
+            No students added.
+          </Typography>
+        ) : (
+          students.map((student, index) => (
+            <ListItem key={index} sx={{ margin: "0px", padding: "0px" }}>
+              <ListItemButton onClick={() => selectStudent(student)}>
+                <ListItemText
+                  primary={
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontSize: { xs: "18px", md: "22px" },
+                        color: "#335C6E",
+                      }}
+                    >
+                      {index + 1}. {student}
+                    </Typography>
+                  }
+                />
+              </ListItemButton>
+              <ListItemSecondaryAction>
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => removeStudent(student)}
+                  sx={{
+                    fontSize: { xs: "26px", md: "30px" },
+                    color: "#5ACCCC",
+                  }}
+                >
+                  <DeleteIcon fontSize="inherit" />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          ))
+        )}
       </List>
       <Button
         variant="contained"
