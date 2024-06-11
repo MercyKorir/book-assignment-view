@@ -74,7 +74,7 @@ const StudentList: React.FC<StudentListProps> = ({
           height: { xs: "40px", md: "50px" },
           width: { xs: "230px", md: "250px" },
           marginBottom: { xs: "0px", md: "5px" },
-          fontSize: { xs: "14px", md: "22px" },
+          fontSize: { xs: "14px", md: "16px" },
         }}
       >
         Clear Selected Student
