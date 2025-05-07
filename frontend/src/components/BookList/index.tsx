@@ -55,7 +55,7 @@ const BookList: React.FC<BookListProps> = ({
           key={index}
           xs={12}
           sm={6}
-          md={4}
+          md={5}
           sx={{ margin: "auto", width: { xs: "100%", sm: "auto" } }}
         >
           <Card
