@@ -4,3 +4,7 @@ export interface Book {
   coverPhotoURL: string;
   readingLevel: string;
 }
+
+export interface GetBooksData {
+  books: Book[];
+}

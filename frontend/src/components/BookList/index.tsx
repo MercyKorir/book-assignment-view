@@ -1,7 +1,7 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import { GET_BOOKS } from "../../graphql/queries";
-import { Book } from "../../types";
+import { Book, GetBooksData } from "../../types";
 import {
   Grid,
   IconButton,
@@ -26,10 +26,11 @@ const BookList: React.FC<BookListProps> = ({
   selectedStudent,
   readingList,
 }) => {
-  const { loading, error, data } = useQuery(GET_BOOKS);
+  const { loading, error, data } = useQuery<GetBooksData>(GET_BOOKS);
 
   if (loading) return <CircularProgress />;
   if (error) return <p>Error: {error.message}</p>;
+  if (!data) return <p>No data available</p>;
 
   const filteredBooks = data.books.filter((book: Book) =>
     book.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -51,11 +52,8 @@ const BookList: React.FC<BookListProps> = ({
     >
       {filteredBooks.map((book: Book, index: any) => (
         <Grid
-          item
           key={index}
-          xs={12}
-          sm={6}
-          md={5}
+          size={{ xs: 12, sm: 6, md: 5 }}
           sx={{ margin: "auto", width: { xs: "100%", sm: "auto" } }}
         >
           <Card

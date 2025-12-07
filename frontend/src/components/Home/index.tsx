@@ -20,8 +20,8 @@ import BookList from "../BookList";
 import ReadingList from "../ReadingList";
 import StudentList from "../StudentList";
 import AddStudentForm from "../StudentList/AddStudentForm";
-import { Book } from "../../types";
-import { useQuery } from "@apollo/client";
+import { Book, GetBooksData } from "../../types";
+import { useQuery } from "@apollo/client/react";
 import { GET_BOOKS } from "../../graphql/queries";
 
 interface HomeProps {}
@@ -35,7 +35,7 @@ const Home: React.FC<HomeProps> = () => {
     {}
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { loading, error, data } = useQuery(GET_BOOKS);
+  const { loading, error, data } = useQuery<GetBooksData>(GET_BOOKS);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -108,6 +108,7 @@ const Home: React.FC<HomeProps> = () => {
   if (error) {
     toast.error(`Error occurred: ${error.message}`);
   }
+  if (!data) return <p>No data available</p>;
 
   return (
     <Container
@@ -293,9 +294,7 @@ const Home: React.FC<HomeProps> = () => {
           </Box>
         </Drawer>
         <Grid
-          item
-          xs={12}
-          sm={3.6}
+          size={{ xs: 12, sm: 3.6 }}
           sx={{
             width: "100%",
             padding: "0px",
@@ -343,9 +342,7 @@ const Home: React.FC<HomeProps> = () => {
           </Box>
         </Grid>
         <Grid
-          item
-          xs={12}
-          sm={8.4}
+          size={{ xs: 12, sm: 8.4 }}
           sx={{
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             padding: {

@@ -39,6 +39,25 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## Security Notes
+
+Some development dependencies of Create React App may show `npm audit` warnings. These vulnerabilities exist **only in development/build tooling**, not in the production bundle. Production builds created with `npm run build` are safe to deploy.
+
+| Package                      | Vulnerability                            | Severity  | Notes                                         |
+|------------------------------|------------------------------------------|-----------|-----------------------------------------------|
+| `nth-check`                  | Inefficient RegEx Complexity             | High      | Affects `svgo` via CSS parsing at build time  |
+| `postcss`                    | Line return parsing error                | Moderate  | Used by `resolve-url-loader` in build         |
+| `webpack-dev-server`         | Source exposure in non-Chromium browsers | Moderate  | Only affects local dev server, not production |
+| `svgo` / `@svgr/plugin-svgo` | Deep dependency issue                    | High      | Only affects SVG optimization at build        |
+| `resolve-url-loader`         | Uses vulnerable `postcss`                | Moderate  | Development-time only                         |
+
+**Recommendations:**
+
+1. Do **not** run `npm audit fix --force` as it may break CRA and `react-scripts`.  
+2. Production builds (`npm run build`) are **safe** to deploy.  
+3. Consider **migrating to Vite** or a custom React build in the future to eliminate dev dependency warnings.  
+
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
